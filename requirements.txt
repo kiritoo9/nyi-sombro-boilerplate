@@ -1,0 +1,8 @@
+fastapi
+"uvicorn[standard]"
+python-dotenv
+PyJWT
+marshmallow
+bcrypt
+psycopg2
+SQLAlchemy
