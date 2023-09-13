@@ -7,6 +7,8 @@ load_dotenv(dotenv_path=env_path)
 
 class Settings:
     APP_NAME:str = os.getenv("APP_NAME")
+    APP_HOST:str = os.getenv("APP_HOST")
+    APP_PORT:str = os.getenv("APP_PORT")
     APP_VERSION:str = os.getenv("APP_VERSION")
 
     DB_HOST:str = os.getenv("DB_HOST")

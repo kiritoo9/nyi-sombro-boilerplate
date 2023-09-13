@@ -10,7 +10,13 @@ pip install -r requirements.txt
 ```
 
 ## Run
+```bash
 uvicorn main:app --reload --host {HOST} --port {PORT}
+```
+or
+```bash
+python main.py
+```
 
 ## Version
 1.0

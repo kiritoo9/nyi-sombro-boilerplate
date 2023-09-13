@@ -30,9 +30,10 @@ class HealthCheck(BaseModel):
 def get_health() -> HealthCheck:
     return HealthCheck(status="OK")
 
-# initiate routes
+# regist routes
 app.include_router(user.router)
 
+# welcome route
 @app.get("/")
 async def welcome():
     return {
@@ -41,7 +42,7 @@ async def welcome():
     }
 
 def main() -> None:
-    uvicorn.run("main:app", host="0.0.0.0", port=3000)
+    uvicorn.run("main:app", host=settings.APP_HOST, port=int(settings.APP_PORT))
 
 if __name__ == "__main__":
     main()
