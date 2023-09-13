@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```bash
 uvicorn main:app --reload --host {HOST} --port {PORT}
 ```
-<i>use command above if you want to hot reload</i><br />
+<i>Note: use command above if you want to hot reload</i><br />
 or
 ```bash
 python main.py
@@ -25,7 +25,7 @@ python main.py
 ## Version
 1.0
 
-## Version History
+## Version Histories
 1.0
 <ul>
     <li>Build core architecture</li>

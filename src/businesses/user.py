@@ -2,6 +2,7 @@ import math
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from src.models.user import User
+from sqlalchemy.exc import SQLAlchemyError
 
 async def getUserLists(
     db: Session,
@@ -59,10 +60,28 @@ async def getUserCount(
 async def getUserById(
     db: Session,
     id
-) -> dict:
-    result = db.query(User.id, User.email, User.fullname)\
+) -> any:
+    result = db.query(User)\
         .filter(User.deleted == False)\
         .filter(User.id == str(id))\
+        .first()
+
+    if result is None:
+        return None
+
+    return result
+
+async def getUserByEmail(
+    db: Session,
+    email,
+    id: str | None = None
+) -> dict:
+    filters = [User.deleted == False, User.email == email]
+    if id is not None:
+        filters.append(User.id == id)
+
+    result = db.query(User.id, User.email, User.fullname)\
+        .filter(*filters)\
         .first()
 
     if result is None:
@@ -73,3 +92,31 @@ async def getUserById(
         "email": result.email,
         "fullname": result.fullname
     }
+
+async def createUser(
+    db: Session,
+    data: dict
+) -> dict:
+    try:
+        trx = User(**data)
+        db.add(trx)
+        db.commit()
+        db.refresh(trx)
+        return { "message": "success", "success": True }
+    except SQLAlchemyError as err:
+        db.rollback()
+        errorMessage = str(err.__dict__['orig'])
+        return { "message": errorMessage, "success": False }
+
+async def updateUser(
+    db: Session,
+    data
+) -> dict:
+    try:
+        db.merge(data)
+        db.commit()
+        return { "message": "success", "success": True }
+    except SQLAlchemyError as err:
+        db.rollback()
+        errorMessage = str(err.__dict__['orig'])
+        return { "message": errorMessage, "success": False }
