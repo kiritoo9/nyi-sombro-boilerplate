@@ -80,7 +80,7 @@ async def getUserByEmail(
     if id is not None:
         filters.append(User.id == id)
 
-    result = db.query(User.id, User.email, User.fullname)\
+    result = db.query(User.id, User.email, User.fullname, User.password)\
         .filter(*filters)\
         .first()
 
@@ -90,7 +90,8 @@ async def getUserByEmail(
     return {
         "id": result.id,
         "email": result.email,
-        "fullname": result.fullname
+        "fullname": result.fullname,
+        "password": result.password
     }
 
 async def createUser(
