@@ -1,12 +1,17 @@
+import uvicorn
 from fastapi import FastAPI, status
 from src.configs.config import settings
 from pydantic import BaseModel
 from typing import Union
-import src.routes.user as user
-import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+from src.configs.database import Base, engine
 
+# Import routes
+import src.routes.user as user
+
+# Config application
 def create_tables():
-    pass
+    Base.metadata.create_all(bind=engine)
 
 def start_application():
     app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION)
@@ -14,6 +19,15 @@ def start_application():
     return app
 
 app = start_application()
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # Health Check
 class HealthCheck(BaseModel):
@@ -30,9 +44,6 @@ class HealthCheck(BaseModel):
 def get_health() -> HealthCheck:
     return HealthCheck(status="OK")
 
-# regist routes
-app.include_router(user.router)
-
 # welcome route
 @app.get("/")
 async def welcome():
@@ -41,6 +52,10 @@ async def welcome():
         "version": f'{settings.APP_VERSION}'
     }
 
+# Regist transactional routes
+app.include_router(user.router)
+
+# Run
 def main() -> None:
     uvicorn.run("main:app", host=settings.APP_HOST, port=int(settings.APP_PORT))
 
