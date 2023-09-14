@@ -81,7 +81,7 @@ def get_health() -> HealthCheck:
 @app.get("/")
 async def welcome():
     return {
-        "greeting": f'Welcome to our {settings.APP_NAME}',
+        "greeting": f'Welcome to {settings.APP_NAME}',
         "version": f'{settings.APP_VERSION}'
     }
 

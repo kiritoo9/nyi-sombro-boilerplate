@@ -1,4 +1,3 @@
-import os
 import bcrypt
 import jwt
 from fastapi import APIRouter, Response, status, Depends
