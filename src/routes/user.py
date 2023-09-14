@@ -7,7 +7,6 @@ from sqlalchemy.orm import Session
 from src.configs.database import get_db
 from src.businesses.user import getUserLists, getUserCount, getUserById, createUser, getUserByEmail, updateUser
 from src.helpers.upload import upload
-from src.middlewares.verify import verifyToken
 
 # Request body model
 class Body(BaseModel):
