@@ -1,5 +1,5 @@
 ## About
-FastApi Boilerplate
+Nyi Sombro Boilerplate
 
 ## Installation
 ```bash
@@ -19,11 +19,16 @@ or
 python main.py
 ```
 
+## Generator
+```bash
+python sombro.py
+```
+
 ## Author
 <a href="https://github.com/kiritoo9">kiritoo9</a>
 
 ## Version
-1.0
+1.1
 
 ## Version Histories
 1.0
@@ -32,4 +37,8 @@ python main.py
     <li>Base code examples</li>
     <li>Middleware</li>
     <li>CRUD Example</li>
+</ul>
+1.1
+<ul>
+    <li>Model Generator</li>
 </ul>
