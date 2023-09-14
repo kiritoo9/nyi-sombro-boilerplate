@@ -30,7 +30,7 @@ try:
                 ModelGenerator()
                 console.print("\nAlhamdulillah kabéh tabel dina database anjeun geus dihasilkeun, nuhun kang :winking_face::folded_hands:", style="blue")
             elif choosen == 2:
-                generate_crud()
+                console.print(f"\n[yellow]Buat generate CRUD masih dikerjain kang hehe :kissing:")
 
 except Exception as e:
     console.print(f"\nwkwkwk hampura kang masih aya error euy :laughing:\nieu kang error nya: [red]{str(e)}")
