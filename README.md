@@ -30,5 +30,6 @@ python main.py
 <ul>
     <li>Build core architecture</li>
     <li>Base code examples</li>
+    <li>Middleware</li>
     <li>CRUD Example</li>
 </ul>
