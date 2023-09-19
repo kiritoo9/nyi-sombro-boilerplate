@@ -23,7 +23,6 @@ router = APIRouter(
     prefix = "/user",
     tags = ["master.user"]
 )
-
 @router.get("/", status_code=status.HTTP_200_OK)
 async def list(
     response: Response, # to change response status code
